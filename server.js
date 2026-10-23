@@ -22,7 +22,7 @@ const userState = [];  // [{ id, name }]
 function findUserById(id) {
   return userState.find((u) => u.id === id);
 }
-function removeUserByID (id) {
+function removeUserById (id) {
   const idx = userState.findIndex((u) => u.id === id);
   if (idx !== -1) userState.splice(idx, 1);
 }
@@ -110,7 +110,7 @@ wsServer.on("connection", (ws) => {
 
       case "exit": {
         if (ws.user) {
-          removeUserByID(ws.user.id);
+          removeUserById(ws.user.id);
           logger.info({ user: ws.user }, "user exited");
           ws.user = null;
           broadcastUsers();
